@@ -1,0 +1,52 @@
+<form method="GET" action="form_ujian.php">
+<label>Nama Siswa : </label>
+<input type="text" name="nama" /><br/>
+<label>Pelajaran : </label>
+<select name="pelajaran">
+    <option value="">-- Pilih Pelajaran --</option>
+    <option value="IPA">IPA</option>
+    <option value="IPS">IPS</option>
+    <option value="Matematika">Matematika</option>
+</select><br/>
+<label>Nilai Siswa : </label>
+<input type="text" name="nilai" /><br/>
+<input type="submit" name="proses" value="Simpan" /><br/>
+</form>
+<?php
+//tangkap request
+$nama = $_GET['nama'];
+$matpel = $_GET['pelajaran'];
+$nilai = $_GET['nilai'];
+//cetak
+/*
+echo 'Nama Siswa: '.$nama;
+echo '<br/>Pelajaran: '.$matpel;
+echo '<br/>Nilai Siswa: '.$nilai;
+*/
+//struktur kendali
+//ternary
+$ket = ($nilai >= 60) ? 'Lulus' : 'Gagal';
+//kondisional if
+if($nilai > 85 && $nilai <= 100) $grade = 'A';
+else if($nilai > 75 && $nilai <= 85) $grade = 'B';
+else if($nilai >= 60 && $nilai <= 75) $grade = 'C';
+else if($nilai >= 30 && $nilai < 60) $grade = 'D';
+else if($nilai >= 0 && $nilai < 30) $grade = 'E';
+else $grade = '';
+//switch case
+switch ($grade) {
+    case 'A': $predikat = 'Memuaskan'; break;
+    case 'B': $predikat = 'Bagus'; break;
+    case 'C': $predikat = 'Cukup'; break;
+    case 'D': $predikat = 'Kurang'; break;
+    case 'E': $predikat = 'Buruk'; break;
+    default: $predikat = ''; break;
+}
+?>
+
+Nama Siswa: <?= $nama; ?>
+<br/>Pelajaran: <?= $matpel; ?>
+<br/>Nilai Siswa: <?= $nilai; ?>
+<br/>Keterangan: <?= $ket; ?>
+<br/>Grade: <?= $grade; ?>
+<br/>Predikat: <?= $predikat; ?>
